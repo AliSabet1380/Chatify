@@ -15,7 +15,7 @@ const Conversations = () => {
   });
 
   return (
-    <div className="flex flex-col gap-y-2 items-center justify-center mt-3 w-full ">
+    <div className="flex flex-col gap-y-2 items-center justify-center mt-3 w-full overflow-auto">
       {isLoading ? (
         <span className="loading loading-spinner text-white/70 mt-10" />
       ) : (
