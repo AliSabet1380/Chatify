@@ -2,6 +2,7 @@ const Conversation = require("./../models/conversation-model");
 const Message = require("./../models/message-model");
 const AppError = require("../lib/app-error");
 const catchAsync = require("../lib/catch-async");
+const { io, getReciverSocketId } = require("./../socket/socket");
 
 exports.sendMessage = catchAsync(async (req, res, next) => {
   const { id: reciverId } = req.params;
@@ -28,24 +29,37 @@ exports.sendMessage = catchAsync(async (req, res, next) => {
 
   convesation.messages.push(newMessage._id);
 
+  await Promise.all([newMessage.save(), convesation.save()]);
+
   // SOCKET.IO
 
-  await Promise.all([newMessage.save(), convesation.save()]);
+  const reciverSocketId = getReciverSocketId(reciverId);
+  if (reciverSocketId) {
+    io.to(reciverSocketId).emit("newMessage", newMessage);
+  }
 
   res.status(201).json({ status: "success", data: { message: newMessage } });
 });
 
 exports.getMessage = catchAsync(async (req, res, next) => {
   const { id: reciverId } = req.params;
-  const senderId = req.user.id;
+  const senderId = req.user._id;
 
   const conversationWithMessage = await Conversation.findOne({
     participants: { $all: [reciverId, senderId] },
   }).populate("messages");
 
+  if (!conversationWithMessage)
+    return res.status(200).json({
+      status: "success",
+      data: {
+        messages: [],
+      },
+    });
+
   res.status(200).json({
     status: "success",
-    results: conversationWithMessage.messages.length,
+
     data: {
       messages: conversationWithMessage.messages,
     },
