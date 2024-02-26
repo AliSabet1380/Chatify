@@ -4,10 +4,12 @@ import persistStore from "redux-persist/es/persistStore";
 import storage from "redux-persist/lib/storage";
 import { userReducer } from "./userSlice";
 import { messageReducer } from "./messageSlice";
+import { sidebarUsersReducer } from "./sidebarUsersSlice";
 
 const rootReducer = combineReducers({
   user: userReducer,
   messages: messageReducer,
+  sidebarUsers: sidebarUsersReducer,
 });
 
 const persistConfig = {

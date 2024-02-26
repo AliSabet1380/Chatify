@@ -1,13 +1,21 @@
-import { useState } from "react";
 import { useConversation } from "../../../hooks/useConversation";
 import CoversationItem from "./ConversationItem";
 import { User } from "../../../types/types";
 
+import { useDispatch, useSelector } from "react-redux";
+import { sidebarUsersActions } from "../../../redux/sidebarUsersSlice";
+
 const Conversations = () => {
-  const [users, setUsers] = useState([]);
+  const {
+    sidebarUsers: { users },
+  } = useSelector((state) => state) as {
+    sidebarUsers: { users: [] };
+  };
+
+  const dispatch = useDispatch();
   const { isLoading } = useConversation("/api/users", {
     onSuccess(data) {
-      setUsers(data);
+      dispatch(sidebarUsersActions.setSidebarUsers(data));
     },
     onError(error) {
       console.log(error);
