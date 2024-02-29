@@ -29,7 +29,7 @@ export const SocketContextProvider = ({
 
   useEffect(() => {
     if (user) {
-      const newSocket = io("http://localhost:5000", {
+      const newSocket = io("https://chatify-2i0o.onrender.com", {
         query: {
           userId: state.user.user._id,
         },
