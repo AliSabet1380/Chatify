@@ -57,7 +57,7 @@ const Login = () => {
             </label>
             <input
               ref={passwordInputRef}
-              type="text"
+              type="password"
               id="password"
               className="input p-2 w-full h-10 input-border"
               placeholder="Password"
