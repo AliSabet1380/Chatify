@@ -81,7 +81,7 @@ const SignUp = () => {
             </label>
             <input
               ref={passwordInputRef}
-              type="text"
+              type="password"
               id="password"
               className="input w-full h-10 input-border"
               placeholder="Password"
@@ -93,7 +93,7 @@ const SignUp = () => {
             </label>
             <input
               ref={passwordConfirmInputRef}
-              type="text"
+              type="password"
               id="password_confirm"
               className="input w-full h-10 input-border"
               placeholder="Password Confirm"
