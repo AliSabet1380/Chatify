@@ -11,7 +11,7 @@ import {
 // App Component
 const App = () => {
   return (
-    <div className="flex items-center justify-center p-4 h-screen">
+    <div className="flex items-center justify-center p-4 h-screen text-black dark:text-white">
       <Toaster />
       <BrowserRouter>
         <Routes>
