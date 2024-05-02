@@ -50,7 +50,7 @@ const SignUp = () => {
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto ">
       <div className="w-full p-6 rounded-lg shadow-md text-white bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0 border border-black/10">
         <h2 className="text-2xl text-center ">Sign Up</h2>
-        <form onSubmit={onSubmit} className="text-gray-900">
+        <form onSubmit={onSubmit} className="dark:text-white text-gray-900">
           <div>
             <label htmlFor="username" className="label px-2 pt-3">
               <span className="text-xs">username</span>
